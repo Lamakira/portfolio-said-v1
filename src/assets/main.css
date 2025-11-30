@@ -1,0 +1,42 @@
+
+@import 'tailwindcss';
+
+#app {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+/* Reset body display for full screen */
+/* Reset body display for full screen */
+@media (min-width: 1024px) {
+  body {
+    display: block;
+    place-items: unset;
+  }
+}
+
+html, body, #app {
+  width: 100%;
+  max-width: none !important;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Force sections to be full width */
+/* Force sections to be full width */
+section {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Force GSAP pin-spacer to be full width */
+.pin-spacer {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
