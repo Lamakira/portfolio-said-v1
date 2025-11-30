@@ -83,11 +83,27 @@ Dans cet univers, chaque dataset est une histoire à décoder.`,
         year: "2017",
       },
     ],
+    web: [
+      {
+        degree: "Développeur Data & IA",
+        school: "Coding Academy by EPITECH Bénin",
+        year: "2025",
+      },
+    ],
     data: [
       {
         degree: "Développeur Data & IA",
         school: "Coding Academy by EPITECH Bénin",
         year: "2025",
+      },
+    ],
+  },
+  certifications: {
+    web: [
+      {
+        title: "Postman API Fundamentals Student Expert",
+        issuer: "Postman",
+        image: "/src/assets/images/badge_postman.png",
       },
     ],
   },

@@ -64,6 +64,7 @@ onMounted(() => {
       </div>
 
       <!-- Projects Grid -->
+      <h3 class="text-2xl font-bold text-white mb-6 border-b border-purple-500/30 pb-2 inline-block">Projets</h3>
       <div ref="cardsRef" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div v-for="(project, index) in projects" :key="index" class="project-card group relative">
           <!-- Glass Card -->
@@ -84,6 +85,36 @@ onMounted(() => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </a>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Education & Certifications -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 mt-16">
+        <!-- Education -->
+        <div>
+          <h3 class="text-2xl font-bold text-white mb-6 border-b border-purple-500/30 pb-2 inline-block">Education</h3>
+          <div class="space-y-4">
+            <div v-for="(edu, index) in resumeData.education.web" :key="index" class="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl hover:bg-white/10 transition-colors">
+              <div class="text-purple-300 font-bold text-lg">{{ edu.degree }}</div>
+              <div class="text-white">{{ edu.school }}</div>
+              <div class="text-sm text-slate-400 mt-1">{{ edu.year }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div>
+          <h3 class="text-2xl font-bold text-white mb-6 border-b border-purple-500/30 pb-2 inline-block">Certifications</h3>
+          <div class="space-y-4">
+            <div v-for="(cert, index) in resumeData.certifications.web" :key="index" class="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl hover:bg-white/10 transition-colors flex items-center gap-4">
+              <img :src="cert.image" alt="Certification Badge" class="w-16 h-16 object-contain" />
+              <div>
+                <div class="text-purple-300 font-bold text-lg">{{ cert.title }}</div>
+                <div class="text-white text-sm">{{ cert.issuer }}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
