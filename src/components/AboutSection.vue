@@ -91,11 +91,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" class="w-full bg-white py-20 px-6 relative">
+  <section ref="sectionRef" class="w-full py-20 px-6 relative" style="background-color: var(--bg);">
     <div class="container mx-auto max-w-6xl">
       
-      <!-- Heading -->
-      <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-16 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center" style="color: var(--text-primary);">
         À propos de moi
       </h2>
 
@@ -104,17 +103,17 @@ onMounted(() => {
         
         <!-- Bio -->
         <div ref="bioRef" class="space-y-6">
-          <p class="text-lg text-slate-700 leading-relaxed">
-            Je suis <span class="font-semibold text-slate-900">Saïd Arikama Chabi</span>, un ingénieur polyvalent à la croisée de trois mondes : l'infrastructure réseau, le développement web, et l'analyse de données & IA.
+          <p class="text-lg leading-relaxed" style="color: var(--text-secondary);">
+            Je suis <span class="font-semibold" style="color: var(--text-primary);">Saïd Arikama Chabi</span>, un ingénieur polyvalent à la croisée de trois mondes : l'infrastructure réseau, le développement web, et l'analyse de données & IA.
           </p>
-          <p class="text-lg text-slate-700 leading-relaxed">
-            Ce qui me motive : <span class="font-semibold text-blue-600">comprendre, créer, optimiser</span> — transformer les systèmes, les interfaces et les données en solutions concrètes.
+          <p class="text-lg leading-relaxed" style="color: var(--text-secondary);">
+            Ce qui me motive : <span class="font-semibold" style="color: var(--primary);">comprendre, créer, optimiser</span> — transformer les systèmes, les interfaces et les données en solutions concrètes.
           </p>
-          <p class="text-lg text-slate-700 leading-relaxed">
+          <p class="text-lg leading-relaxed" style="color: var(--text-secondary);">
             Curieux, rigoureux et passionné, j'aime autant explorer les couches invisibles d'une architecture que concevoir de belles expériences visibles par l'utilisateur.
           </p>
-          <p class="text-lg text-slate-700 leading-relaxed">
-            Aujourd'hui, je cherche à collaborer sur des projets où <span class="font-semibold text-slate-900">technologie, logique et créativité</span> se rencontrent pour créer de la valeur.
+          <p class="text-lg leading-relaxed" style="color: var(--text-secondary);">
+            Aujourd'hui, je cherche à collaborer sur des projets où <span class="font-semibold" style="color: var(--text-primary);">technologie, logique et créativité</span> se rencontrent pour créer de la valeur.
           </p>
         </div>
 

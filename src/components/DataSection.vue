@@ -95,17 +95,20 @@ onMounted(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" class="w-full! max-w-none! min-h-screen bg-white text-slate-900 py-20 px-6 relative overflow-hidden">
-    <!-- Grid Pattern Background -->
+  <section class="relative w-full py-20 px-6 overflow-hidden" style="background-color: var(--bg);">
+    <!-- Subtle Grid Pattern -->
     <div class="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:24px_24px] opacity-40 pointer-events-none"></div>
 
     <div class="container mx-auto relative z-10 max-w-7xl">
       
       <!-- Header -->
-      <div ref="headerRef" class="text-center mb-8">
-        <h2 class="text-5xl md:text-6xl lg:text-7xl font-bold text-[#0A1A2F] mb-8 tracking-tight">
-          Data & IA
+      <div ref="headerRef" class="text-center mb-16">
+        <h2 class="text-5xl md:text-6xl font-bold mb-4" style="color: var(--text-primary);">
+          Univers <span style="color: var(--primary);">Data & IA</span>
         </h2>
+        <p class="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed" style="color: var(--text-secondary);">
+          Exploration, analyse et modélisation de données pour révéler des insights actionnables.
+        </p>
       </div>
 
       <!-- Universe Description (conditional) -->

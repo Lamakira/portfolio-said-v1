@@ -73,20 +73,20 @@ onMounted(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" class="w-full bg-gradient-to-br from-blue-50 via-slate-50 to-blue-50 py-20 px-6 relative overflow-hidden">
+  <section ref="sectionRef" class="w-full py-20 px-6 relative overflow-hidden" style="background: linear-gradient(to bottom right, var(--bg-surface), var(--bg), var(--bg-surface));">
     <!-- Decorative elements -->
-    <div class="absolute top-0 right-0 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-emerald-200/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl" style="background-color: var(--primary); opacity: 0.1;"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl" style="background-color: var(--success); opacity: 0.1;"></div>
 
     <div ref="contentRef" class="container mx-auto max-w-4xl text-center relative z-10">
       
       <!-- Heading -->
-      <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6" style="color: var(--text-primary);">
         Travaillons ensemble
       </h2>
 
       <!-- Description -->
-      <p class="text-lg md:text-xl text-slate-700 mb-8 max-w-2xl mx-auto leading-relaxed">
+      <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed" style="color: var(--text-secondary);">
         Vous recherchez un profil polyvalent capable de naviguer entre Web, Data et Réseau ?<br>
         Vous avez un projet, une mission ou une opportunité ? Je serais ravi d'en discuter.
       </p>
@@ -94,7 +94,8 @@ onMounted(() => {
       <!-- CTA Button -->
       <a 
         href="mailto:said.arikama-chabi@epitech.eu"
-        class="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 transition-all duration-300 mb-12 hover:-translate-y-1"
+        class="inline-block px-8 py-4 font-semibold rounded-xl transition-all duration-300 mb-12 hover:-translate-y-1"
+        style="background-color: var(--primary); color: white; box-shadow: 0 10px 25px var(--glow);"
         aria-label="Envoyer un email pour me contacter"
       >
         Me contacter

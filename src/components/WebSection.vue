@@ -89,7 +89,7 @@ onMounted(() => {
 <template>
   <section 
     ref="sectionRef" 
-    class="w-full! max-w-none! min-h-screen bg-slate-900 py-20 px-6 relative overflow-hidden perspective-container"
+    class="relative w-full py-32 px-6 overflow-hidden" style="background-color: var(--bg-surface);"
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
@@ -99,8 +99,8 @@ onMounted(() => {
     </div>
 
     <!-- 2. Glow Halos -->
-    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px] animate-pulse-slow pointer-events-none"></div>
-    <div class="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] animate-pulse-slow delay-1000 pointer-events-none"></div>
+    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px] animate-pulse-slow pointer-events-none" style="background-color: var(--accent); opacity: 0.15;"></div>
+    <div class="absolute bottom-0 right-1/4 w-[600px] h-[600px] rounded-full blur-[120px] animate-pulse-slow delay-1000 pointer-events-none" style="background-color: var(--primary); opacity: 0.12;"></div>
 
     <!-- 3. Web Particles -->
     <div class="absolute inset-0 pointer-events-none">
@@ -118,19 +118,16 @@ onMounted(() => {
     <div class="container mx-auto relative z-10">
       
       <!-- Header -->
-      <div class="text-center mb-16">
-        <h2 ref="titleRef" class="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight relative inline-block">
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-300% animate-gradient">
-            Web Universe
-          </span>
-          <div class="absolute -inset-4 bg-purple-500/20 blur-xl rounded-full opacity-50 -z-10"></div>
+      <div class="text-center">
+        <!-- Title -->
+        <h2 ref="titleRef" class="text-5xl md:text-6xl font-bold mb-8 text-center" style="color: var(--text-primary);">
+          Univers <span style="color: var(--primary);">Web</span>
         </h2>
-
-        <!-- Universe Description -->
         <div ref="descRef" class="max-w-3xl mx-auto min-h-[80px]">
           <transition name="fade-slide">
-            <p v-if="state.isWebActive" class="text-xl text-slate-300 font-light leading-relaxed whitespace-pre-line glass-panel p-6 rounded-xl border-l-4 border-purple-500">
-              "{{ resumeData.descriptions.web }}"
+            <p v-if="state.isWebActive" class="text-xl font-light leading-relaxed whitespace-pre-line p-6 rounded-xl border-l-4" 
+               style="color: var(--text-secondary); background-color: var(--bg-surface); border-color: var(--primary); box-shadow: 0 4px 12px var(--shadow);">
+              {{ resumeData.universes.web }}
             </p>
           </transition>
         </div>
@@ -234,35 +231,32 @@ onMounted(() => {
       <h3 class="text-3xl font-bold text-white mb-10 border-b border-purple-500/30 pb-4 inline-block">Projets</h3>
       <div ref="cardsRef" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
         <div v-for="(project, index) in projects" :key="index" class="project-card group relative h-full">
-          <!-- Glass Card -->
-          <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <!-- Glow Effect on Hover -->
+          <div class="absolute inset-0 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: linear-gradient(to bottom right, var(--accent), var(--primary)); opacity: 0.1;"></div>
           
-          <div class="relative bg-slate-800/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 h-full flex flex-col 
-                      group-hover:border-purple-500/30 transition-all duration-300 shadow-2xl overflow-hidden">
+          <div class="relative rounded-2xl p-8 h-full flex flex-col transition-all duration-300 overflow-hidden"
+               style="background-color: var(--bg-surface); border: 1px solid var(--glass-border); box-shadow: 0 4px 12px var(--shadow);">
             
             <!-- Shimmer Effect -->
-            <div class="shimmer absolute w-32 h-32 bg-white/5 rounded-full blur-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="shimmer absolute w-32 h-32 rounded-full blur-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" style="background-color: var(--primary); opacity: 0.05;"></div>
 
-            <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors relative z-10">{{ project.title }}</h3>
-            <p class="text-slate-300 mb-6 flex-grow leading-relaxed relative z-10">{{ project.description }}</p>
+            <h3 class="text-2xl font-bold mb-3 group-hover:opacity-80 transition-colors relative z-10" style="color: var(--text-primary);">{{ project.title }}</h3>
+            <p class="mb-6 flex-grow leading-relaxed relative z-10" style="color: var(--text-secondary);">{{ project.description }}</p>
             
             <div class="flex flex-wrap gap-2 mb-6 relative z-10">
-              <span v-for="tech in project.tech" :key="tech" class="text-xs font-mono text-purple-200 bg-purple-500/20 px-3 py-1 rounded border border-purple-500/20">
+              <span v-for="tech in project.tech" :key="tech" class="text-xs font-mono px-3 py-1 rounded" style="color: var(--primary); background-color: var(--glass); border: 1px solid var(--glass-border);">
                 {{ tech }}
               </span>
             </div>
 
             <router-link 
-              :to="{ 
-                name: 'project-detail', 
-                params: { slug: project.slug || (project.title === 'YOWL' ? 'yowl' : project.title === 'FreeAds' ? 'freeads' : 'postit') },
-                query: { from: 'web' }
-              }" 
-              class="inline-flex items-center text-purple-300 hover:text-white transition-colors font-medium group/link relative z-10"
+              :to="{ path: `/project/${project.slug}`, query: { from: 'web' } }"
+              class="inline-flex items-center gap-2 font-semibold group/link relative z-10 transition-colors"
+              style="color: var(--primary);"
             >
               Voir le projet
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
             </router-link>
           </div>

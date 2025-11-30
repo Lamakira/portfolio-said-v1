@@ -54,12 +54,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <section ref="heroRef" class="relative w-full max-w-none min-h-screen flex flex-col justify-between bg-slate-950 overflow-hidden text-white py-12 md:py-0">
+  <section ref="heroRef" class="relative w-full max-w-none min-h-screen flex flex-col justify-between overflow-hidden py-12 md:py-0" style="background-color: var(--bg-surface);">
     
     <!-- Subtle Background -->
-    <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"></div>
-    <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-1/4 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute inset-0" style="background: linear-gradient(to bottom right, var(--bg-surface), var(--bg), var(--bg-surface));"></div>
+    <div class="absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl" style="background-color: var(--primary); opacity: 0.05;"></div>
+    <div class="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl" style="background-color: var(--accent); opacity: 0.05;"></div>
 
     <!-- Main Content - Photo Left, Text Right (Top Section) -->
     <div class="relative z-10 container mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 flex-grow md:flex-grow-0 md:my-auto">
@@ -85,8 +85,8 @@ onMounted(() => {
       <div ref="contentRef" class="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl">
         
         <!-- Name -->
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-slate-100 drop-shadow-[0_0_20px_rgba(148,163,184,0.3)]">
-          Saïd ARIKAMA CHABI
+        <h1 ref="titleRef" class="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-tight leading-tight">
+          <span style="color: var(--text-primary);">Saïd</span> <span style="color: var(--primary);">ARIKAMA CHABI</span>
         </h1>
         
         <!-- Subtitle -->
@@ -95,7 +95,7 @@ onMounted(() => {
         </h2>
         
         <!-- Description -->
-        <p class="text-base md:text-lg text-slate-300 leading-relaxed mb-8 max-w-xl">
+        <p ref="subtitleRef" class="text-xl md:text-2xl mb-8 max-w-2xl leading-relaxed" style="color: var(--text-secondary);">
           Passionné par l'ingénierie logicielle, l'analyse de données et l'infrastructure réseau, je conçois des solutions qui connectent, transforment et donnent vie aux expériences numériques.
         </p>
         

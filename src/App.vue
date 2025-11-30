@@ -1,8 +1,22 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { RouterView } from 'vue-router';
+import { onMounted } from 'vue';
+import { useTheme } from '@/composables/useTheme';
+import DarkToggle from '@/components/DarkToggle.vue';
+
+const { initTheme, watchSystemTheme } = useTheme();
+
+onMounted(() => {
+  // Initialize theme from localStorage or system preference
+  initTheme();
+  
+  // Watch for system theme changes
+  watchSystemTheme();
+});
 </script>
 
 <template>
+  <DarkToggle />
   <RouterView />
 </template>
 

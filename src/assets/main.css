@@ -1,6 +1,93 @@
 
 @import 'tailwindcss';
 
+/* ===== THEME VARIABLES ===== */
+
+/* Light Theme (Default) - Updated for better contrast */
+:root {
+  /* Backgrounds */
+  --bg: #EEF1F7;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F8FAFC;
+  
+  /* Text */
+  --text-primary: #0B1628;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  
+  /* Brand Colors */
+  --primary: #4F46E5;
+  --primary-hover: #4338CA;
+  --accent: #6366F1;
+  --accent-hover: #4F46E5;
+  
+  /* Semantic */
+  --success: #10B981;
+  --warning: #F59E0B;
+  --error: #EF4444;
+  
+  /* Effects */
+  --glass: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --shadow: rgba(0, 0, 0, 0.06);
+  --glow: rgba(120, 90, 255, 0.25);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg: #0B1220;
+  --bg-surface: #0F1724;
+  --bg-elevated: #1A2332;
+  
+  /* Text */
+  --text-primary: #E6EEF8;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+  
+  /* Brand Colors */
+  --primary: #60A5FA;
+  --primary-hover: #3B82F6;
+  --accent: #8B5CF6;
+  --accent-hover: #7C3AED;
+  
+  /* Semantic */
+  --success: #34D399;
+  --warning: #FBBF24;
+  --error: #F87171;
+  
+  /* Effects */
+  --glass: rgba(20, 25, 32, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --shadow: rgba(0, 0, 0, 0.3);
+  --glow: rgba(96, 165, 250, 0.2);
+}
+
+/* Smooth theme transitions */
+:root,
+[data-theme="dark"] {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Disable transitions during theme change to avoid lag */
+[data-theme-transitioning] * {
+  transition: none !important;
+}
+
+/* Glass effect utilities */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+}
+
 #app {
   width: 100%;
   max-width: none;
@@ -45,7 +132,7 @@ section {
 
 /* Visible focus states for keyboard navigation */
 *:focus-visible {
-  outline: 2px solid #3B82F6;
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -53,7 +140,7 @@ section {
 /* Better focus for buttons and links */
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid #3B82F6;
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
