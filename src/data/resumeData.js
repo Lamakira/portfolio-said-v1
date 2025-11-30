@@ -110,22 +110,28 @@ Dans cet univers, chaque dataset est une histoire à décoder.`,
   projects: {
     web: [
       {
+        slug: 'yowl',
         title: "YOWL",
-        description: "Plateforme de commentaires et d'avis utilisateurs.",
-        tech: ["Laravel", "Vue.js", "MySQL"],
+        description: "Plateforme d'avis et de commentaires communautaire (TripAdvisor-like).",
+        tech: ["Laravel", "Vue.js", "TailwindCSS"],
         link: "#",
+        image: ""
       },
       {
+        slug: 'freeads',
         title: "FreeAds",
-        description: "Site de petites annonces avec gestion de comptes.",
-        tech: ["Laravel", "PHP", "Auth"],
+        description: "Marketplace de petites annonces avec gestion complète (CRUD, Auth, Search).",
+        tech: ["Laravel", "Blade", "MySQL"],
         link: "#",
+        image: ""
       },
       {
+        slug: 'postit',
         title: "Post-it SPA",
-        description: "Application de gestion de notes collaborative.",
-        tech: ["Vue.js", "API REST"],
+        description: "Application de gestion de notes en Single Page Application.",
+        tech: ["Vue.js", "API REST", "LocalStorage"],
         link: "#",
+        image: ""
       },
     ],
     data: [

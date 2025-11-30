@@ -220,12 +220,12 @@ onMounted(() => {
               </span>
             </div>
 
-            <a :href="project.link" class="inline-flex items-center text-purple-300 hover:text-white transition-colors font-medium group/link relative z-10">
+            <router-link :to="{ name: 'project-detail', params: { slug: project.slug || (project.title === 'YOWL' ? 'yowl' : project.title === 'FreeAds' ? 'freeads' : 'postit') } }" class="inline-flex items-center text-purple-300 hover:text-white transition-colors font-medium group/link relative z-10">
               View Project 
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
