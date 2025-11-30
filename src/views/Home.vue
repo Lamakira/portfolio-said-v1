@@ -11,11 +11,11 @@ import { resumeData } from '@/data/resumeData';
 <template>
   <main class="w-full max-w-none overflow-x-hidden">
     <Hero />
-    <HeroNetwork />
+    <HeroNetwork id="network" />
     <PortalNetworkToWeb />
-    <WebSection />
+    <WebSection id="web" />
     <PortalWebToData />
-    <DataSection />
+    <DataSection id="data" />
     
     <!-- Footer / Contact -->
     <footer class="bg-slate-900 text-white py-12 text-center border-t border-slate-800">

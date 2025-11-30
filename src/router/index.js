@@ -25,10 +25,20 @@ const router = createRouter({
     },
   ],
   scrollBehavior(to, from, savedPosition) {
+    // Don't auto-scroll if coming from a project page with 'from' parameter
+    // This allows BackButton component to handle the scroll
+    if (from.name === 'project-detail' || from.name === 'data-project') {
+      if (from.query.from) {
+        // Let BackButton handle the scroll
+        return false;
+      }
+    }
+    
     // Always scroll to top for project detail pages
     if (to.name === 'project-detail' || to.name === 'data-project') {
       return { top: 0, behavior: 'instant' };
     }
+    
     if (savedPosition) {
       return savedPosition;
     } else {

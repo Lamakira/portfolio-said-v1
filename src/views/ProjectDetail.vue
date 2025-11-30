@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { projectsData } from '@/data/projects';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import BackButton from '@/components/BackButton.vue';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -177,16 +178,27 @@ onUnmounted(() => {
       </div>
 
       <div class="relative z-10 text-center max-w-4xl mx-auto">
-        <h1 class="text-6xl md:text-8xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-100 to-slate-400 drop-shadow-[0_0_30px_rgba(168,85,247,0.3)]">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(168,85,247,0.5)]">
           {{ project.title }}
         </h1>
-        <p class="baseline text-xl md:text-2xl text-slate-300 font-light mb-8 max-w-2xl mx-auto leading-relaxed">
+        <p class="text-xl md:text-2xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
           {{ project.baseline }}
         </p>
-        <div class="flex flex-wrap justify-center gap-3">
-          <span v-for="tag in project.tags" :key="tag" class="tag-chip px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-sm font-medium text-purple-200 hover:bg-white/10 transition-colors">
+        
+        <!-- Tags -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <span 
+            v-for="tag in project.tags" 
+            :key="tag"
+            class="px-4 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full text-purple-300 text-sm font-medium backdrop-blur-sm hover:bg-purple-500/20 transition-colors"
+          >
             {{ tag }}
           </span>
+        </div>
+
+        <!-- Back Button -->
+        <div class="mt-6">
+          <BackButton />
         </div>
       </div>
       
@@ -303,14 +315,10 @@ onUnmounted(() => {
         <!-- Image -->
         <img :src="images[lightboxIndex]" class="max-w-full max-h-[90vh] rounded-2xl shadow-[0_0_50px_rgba(168,85,247,0.3)] border border-purple-500/20" />
         
-        <!-- Next Button -->
-        <button class="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white p-2 z-50" @click="nextLightboxImage">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-        
-        <!-- Counter -->
+        <!-- Back Button -->
+      <div class="text-center py-12">
+        <BackButton />
+      </div>
         <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 font-mono bg-black/50 px-4 py-2 rounded-full backdrop-blur-md">
           {{ lightboxIndex + 1 }} / {{ images.length }}
         </div>
@@ -442,11 +450,9 @@ onUnmounted(() => {
 
     <!-- G. Footer -->
     <footer class="py-20 text-center">
-      <router-link to="/" class="inline-flex items-center gap-2 text-purple-300 hover:text-white transition-colors text-lg font-medium group">
-        <span class="transform group-hover:-translate-x-1 transition-transform">←</span>
-        Retour aux projets
-      </router-link>
+      <BackButton />
     </footer>
+
 
   </div>
 </template>
