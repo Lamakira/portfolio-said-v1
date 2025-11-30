@@ -11,7 +11,42 @@ const sectionRef = ref(null);
 const headerRef = ref(null);
 const descriptionRef = ref(null);
 const educationRef = ref(null);
+const skillsRef = ref(null);
 const projectsRef = ref(null);
+
+// Data skills categories
+const dataSkills = [
+  {
+    title: 'Manipulation & Analyse de Données',
+    icon: '📊',
+    skills: ['Pandas', 'NumPy', 'Data Cleaning', 'Feature Engineering', 'EDA']
+  },
+  {
+    title: 'Machine Learning',
+    icon: '🤖',
+    skills: ['SVC', 'KNN', 'Random Forest', 'Decision Trees', 'Metrics (Accuracy, F1, Precision, Recall)']
+  },
+  {
+    title: 'Deep Learning',
+    icon: '🧠',
+    skills: ['TensorFlow', 'Keras', 'CNN', 'MLP', 'Dense Networks', 'Regularization']
+  },
+  {
+    title: 'NLP (Natural Language Processing)',
+    icon: '💬',
+    skills: ['TF-IDF', 'LSA', 'Lemmatization', 'Stopwords', 'Similarity', 'K-means', 'Word Clouds']
+  },
+  {
+    title: 'Visualisation & BI',
+    icon: '📈',
+    skills: ['Matplotlib', 'Seaborn', 'Power BI', 'Business Dashboards']
+  },
+  {
+    title: 'Pipelines & Outils',
+    icon: '🛠️',
+    skills: ['Git', 'GitHub', 'Jupyter', 'Modular Python']
+  }
+];
 
 onMounted(() => {
   const tl = gsap.timeline({ delay: 0.2 });
@@ -97,6 +132,37 @@ onMounted(() => {
             </div>
             <div class="text-[#4B5563] font-mono text-sm md:text-right">
               2025
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills & Tools Section -->
+      <div class="mb-20">
+        <h3 class="text-4xl font-bold text-[#0A1A2F] mb-12 text-center">Compétences & Outils</h3>
+        <div ref="skillsRef" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div 
+            v-for="(category, index) in dataSkills" 
+            :key="index"
+            class="bg-white rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 group"
+          >
+            <!-- Icon & Title -->
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl">{{ category.icon }}</span>
+              <h4 class="text-lg font-bold text-[#0A1A2F] group-hover:text-[#3B82F6] transition-colors">
+                {{ category.title }}
+              </h4>
+            </div>
+            
+            <!-- Skills Pills -->
+            <div class="flex flex-wrap gap-2">
+              <span 
+                v-for="skill in category.skills" 
+                :key="skill"
+                class="px-3 py-1.5 text-xs font-medium bg-blue-50 text-[#3B82F6] rounded-full border border-blue-200"
+              >
+                {{ skill }}
+              </span>
             </div>
           </div>
         </div>
