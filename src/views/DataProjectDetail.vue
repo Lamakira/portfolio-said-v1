@@ -3,6 +3,7 @@ import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { dataProjects } from '@/data/dataProjects';
 import { gsap } from 'gsap';
+import BackButton from '@/components/BackButton.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -75,7 +76,7 @@ watch(() => route.params.slug, () => {
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0A1A2F] mb-6 leading-tight">
           {{ project.title }}
         </h1>
-        <div class="flex flex-wrap justify-center gap-2">
+        <div class="flex flex-wrap justify-center gap-2 mb-6">
           <span 
             v-for="(tag, index) in project.tags" 
             :key="tag"
@@ -86,6 +87,10 @@ watch(() => route.params.slug, () => {
           >
             {{ tag }}
           </span>
+        </div>
+        <!-- Back Button -->
+        <div class="mt-6">
+          <BackButton />
         </div>
       </div>
     </section>
@@ -183,15 +188,7 @@ watch(() => route.params.slug, () => {
 
       <!-- Back Button -->
       <div class="text-center pt-8">
-        <router-link 
-          to="/" 
-          class="inline-flex items-center gap-2 text-[#3B82F6] hover:text-[#0A1A2F] font-semibold text-lg transition-colors"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Retour à Data & IA
-        </router-link>
+        <BackButton />
       </div>
     </div>
 

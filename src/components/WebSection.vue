@@ -21,36 +21,68 @@ const skills = resumeData.skills.web;
 // ... (Tilt Logic remains same)
 
 onMounted(() => {
-  // ... (Orb Animation remains same)
+  // Use matchMedia for responsive animation durations
+  gsap.matchMedia().add({
+    // Desktop animations (full duration)
+    "(min-width: 1024px)": () => {
+      const tl = createScene(sectionRef.value, {
+        start: 'top center',
+        end: 'bottom bottom',
+      });
 
-  // Entrance Timeline
-  const tl = createScene(sectionRef.value, {
-    start: 'top center',
-    end: 'bottom bottom',
+      if (tl) {
+        tl.from(titleRef.value, { y: 50, opacity: 0, duration: 1, ease: 'power3.out' })
+          .from(descRef.value, { y: 30, opacity: 0, duration: 0.8 }, '-=0.5')
+          .from(orbRef.value, { scale: 0, opacity: 0, rotation: -180, duration: 1.2, ease: 'back.out(1.7)' }, '-=0.6')
+          .from(techStackRef.value.children, { 
+            y: 30, 
+            opacity: 0, 
+            stagger: 0.2, 
+            duration: 0.8,
+            ease: 'power2.out'
+          }, '-=0.4')
+          .from(cardsRef.value.children, {
+            y: 100,
+            opacity: 0,
+            rotationX: 15,
+            stagger: 0.1,
+            duration: 1,
+            ease: 'power3.out',
+          }, '-=0.2')
+          .from(eduRef.value, { y: 50, opacity: 0, duration: 1 }, '-=0.8');
+      }
+    },
+
+    // Mobile animations (faster, 50% duration reduction)
+    "(max-width: 1023px)": () => {
+      const tl = createScene(sectionRef.value, {
+        start: 'top center',
+        end: 'bottom bottom',
+      });
+
+      if (tl) {
+        tl.from(titleRef.value, { y: 30, opacity: 0, duration: 0.5, ease: 'power2.out' })
+          .from(descRef.value, { y: 20, opacity: 0, duration: 0.4 }, '-=0.3')
+          .from(orbRef.value, { scale: 0, opacity: 0, rotation: -90, duration: 0.6, ease: 'back.out(1.4)' }, '-=0.3')
+          .from(techStackRef.value.children, { 
+            y: 20, 
+            opacity: 0, 
+            stagger: 0.1, 
+            duration: 0.4,
+            ease: 'power2.out'
+          }, '-=0.2')
+          .from(cardsRef.value.children, {
+            y: 50,
+            opacity: 0,
+            rotationX: 0, // No 3D rotation on mobile
+            stagger: 0.08,
+            duration: 0.5,
+            ease: 'power2.out',
+          }, '-=0.15')
+          .from(eduRef.value, { y: 30, opacity: 0, duration: 0.5 }, '-=0.4');
+      }
+    }
   });
-
-  if (tl) {
-    // Staggered Entrance
-    tl.from(titleRef.value, { y: 50, opacity: 0, duration: 1, ease: 'power3.out' })
-      .from(descRef.value, { y: 30, opacity: 0, duration: 0.8 }, '-=0.5')
-      .from(orbRef.value, { scale: 0, opacity: 0, rotation: -180, duration: 1.2, ease: 'back.out(1.7)' }, '-=0.6')
-      .from(techStackRef.value.children, { 
-        y: 30, 
-        opacity: 0, 
-        stagger: 0.2, 
-        duration: 0.8,
-        ease: 'power2.out'
-      }, '-=0.4')
-      .from(cardsRef.value.children, {
-        y: 100,
-        opacity: 0,
-        rotationX: 15,
-        stagger: 0.1,
-        duration: 1,
-        ease: 'power3.out',
-      }, '-=0.2')
-      .from(eduRef.value, { y: 50, opacity: 0, duration: 1 }, '-=0.8');
-  }
 });
 </script>
 
@@ -220,7 +252,14 @@ onMounted(() => {
               </span>
             </div>
 
-            <router-link :to="{ name: 'project-detail', params: { slug: project.slug || (project.title === 'YOWL' ? 'yowl' : project.title === 'FreeAds' ? 'freeads' : 'postit') } }" class="inline-flex items-center text-purple-300 hover:text-white transition-colors font-medium group/link relative z-10">
+            <router-link 
+              :to="{ 
+                name: 'project-detail', 
+                params: { slug: project.slug || (project.title === 'YOWL' ? 'yowl' : project.title === 'FreeAds' ? 'freeads' : 'postit') },
+                query: { from: 'web' }
+              }" 
+              class="inline-flex items-center text-purple-300 hover:text-white transition-colors font-medium group/link relative z-10"
+            >
               Voir le projet
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />

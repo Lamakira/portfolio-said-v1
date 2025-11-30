@@ -11,7 +11,7 @@ const props = defineProps({
 
 <template>
   <router-link 
-    :to="`/data/${project.slug}`"
+    :to="{ path: `/data/${project.slug}`, query: { from: 'data' } }"
     class="group block bg-white rounded-2xl shadow-sm hover:shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 border border-gray-100"
   >
     <!-- Cover Image -->
