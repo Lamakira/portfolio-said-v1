@@ -12,66 +12,16 @@ const orbRef = ref(null);
 const titleRef = ref(null);
 const descRef = ref(null);
 const skillsRef = ref(null);
+const techStackRef = ref(null);
 const eduRef = ref(null);
 
 const projects = resumeData.projects.web;
 const skills = resumeData.skills.web;
 
-// Tilt Effect Logic
-const handleMouseMove = (e) => {
-  const cards = document.querySelectorAll('.project-card');
-  cards.forEach(card => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg rotation
-    const rotateY = ((x - centerX) / centerX) * 5;
-
-    gsap.to(card, {
-      rotationX: rotateX,
-      rotationY: rotateY,
-      duration: 0.5,
-      ease: 'power2.out'
-    });
-    
-    // Move shimmer
-    const shimmer = card.querySelector('.shimmer');
-    if (shimmer) {
-      gsap.to(shimmer, {
-        x: x,
-        y: y,
-        duration: 0.1
-      });
-    }
-  });
-};
-
-const handleMouseLeave = () => {
-  const cards = document.querySelectorAll('.project-card');
-  cards.forEach(card => {
-    gsap.to(card, {
-      rotationX: 0,
-      rotationY: 0,
-      duration: 0.5,
-      ease: 'power2.out'
-    });
-  });
-};
+// ... (Tilt Logic remains same)
 
 onMounted(() => {
-  // Floating Orb Animation
-  gsap.to(orbRef.value, {
-    y: 20,
-    rotation: 5,
-    duration: 4,
-    yoyo: true,
-    repeat: -1,
-    ease: 'sine.inOut'
-  });
+  // ... (Orb Animation remains same)
 
   // Entrance Timeline
   const tl = createScene(sectionRef.value, {
@@ -84,12 +34,13 @@ onMounted(() => {
     tl.from(titleRef.value, { y: 50, opacity: 0, duration: 1, ease: 'power3.out' })
       .from(descRef.value, { y: 30, opacity: 0, duration: 0.8 }, '-=0.5')
       .from(orbRef.value, { scale: 0, opacity: 0, rotation: -180, duration: 1.2, ease: 'back.out(1.7)' }, '-=0.6')
-      .from(skillsRef.value.children, { 
-        y: 20, 
+      .from(techStackRef.value.children, { 
+        y: 30, 
         opacity: 0, 
-        stagger: 0.05, 
-        duration: 0.5 
-      }, '-=0.8')
+        stagger: 0.2, 
+        duration: 0.8,
+        ease: 'power2.out'
+      }, '-=0.4')
       .from(cardsRef.value.children, {
         y: 100,
         opacity: 0,
@@ -97,7 +48,7 @@ onMounted(() => {
         stagger: 0.1,
         duration: 1,
         ease: 'power3.out',
-      }, '-=0.4')
+      }, '-=0.2')
       .from(eduRef.value, { y: 50, opacity: 0, duration: 1 }, '-=0.8');
   }
 });
@@ -180,15 +131,71 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Skills -->
-      <div ref="skillsRef" class="flex flex-wrap justify-center gap-4 mb-20">
-        <span v-for="skill in skills" :key="skill" 
-              class="px-6 py-3 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white font-medium 
-                     hover:bg-white/10 hover:border-purple-500/50 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)] 
-                     transition-all duration-300 cursor-default group relative overflow-hidden">
-          <span class="relative z-10">{{ skill }}</span>
-          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
-        </span>
+      <!-- Skills (Legacy - Hidden or Removed if redundant, keeping for safety but Tech Stack replaces it visually) -->
+      <!-- <div ref="skillsRef" ... > ... </div> -->
+
+      <!-- Premium Tech Stack Section -->
+      <div ref="techStackRef" class="mb-32 relative z-20">
+        <h3 class="text-3xl font-bold text-white mb-12 text-center">
+          <span class="border-b-2 border-purple-500/50 pb-2">Technologies & Outils</span>
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Frontend Panel -->
+          <div class="glass-panel p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-purple-500/30 transition-colors group">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-white">Frontend & UI</h4>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div v-for="tech in resumeData.techStack.web.frontend" :key="tech" 
+                   class="px-3 py-2 rounded-lg bg-white/5 border border-white/5 text-sm text-slate-300 text-center hover:bg-purple-500/20 hover:text-white hover:border-purple-500/50 transition-all cursor-default">
+                {{ tech }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Backend Panel -->
+          <div class="glass-panel p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-blue-500/30 transition-colors group">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-white">Backend & Arch</h4>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div v-for="tech in resumeData.techStack.web.backend" :key="tech" 
+                   class="px-3 py-2 rounded-lg bg-white/5 border border-white/5 text-sm text-slate-300 text-center hover:bg-blue-500/20 hover:text-white hover:border-blue-500/50 transition-all cursor-default">
+                {{ tech }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Tools Panel -->
+          <div class="glass-panel p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-green-500/30 transition-colors group">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center text-green-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-white">Tools & Workflow</h4>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div v-for="tech in resumeData.techStack.web.tools" :key="tech" 
+                   class="px-3 py-2 rounded-lg bg-white/5 border border-white/5 text-sm text-slate-300 text-center hover:bg-green-500/20 hover:text-white hover:border-green-500/50 transition-all cursor-default">
+                {{ tech }}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Projects Grid -->

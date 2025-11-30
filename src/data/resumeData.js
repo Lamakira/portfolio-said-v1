@@ -152,6 +152,13 @@ Dans cet univers, chaque dataset est une histoire à décoder.`,
     data: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Power BI", "Scikit-learn", "SVC", "SVR", "KNN", "Random Forest", "TensorFlow", "Keras"],
     soft: ["Esprit d'analyse", "Autonomie", "Adaptabilité"],
   },
+  techStack: {
+    web: {
+      frontend: ["Vue.js", "TailwindCSS", "JavaScript"],
+      backend: ["Laravel", "PHP", "Eloquent ORM", "REST APIs", "MySQL", "Python"],
+      tools: ["Git", "GitHub", "Axios", "Postman"],
+    },
+  },
   assets: {
     cvUrl: "/assets/CV_Saïd ARIKAMA CHABI.pdf",
     photoUrl: "",
