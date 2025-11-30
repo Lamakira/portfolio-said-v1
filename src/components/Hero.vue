@@ -106,9 +106,10 @@ onMounted(() => {
             download 
             target="_blank" 
             rel="noopener noreferrer"
+            aria-label="Télécharger le CV de Saïd Arikama Chabi"
             class="px-8 py-3 rounded-full bg-teal-500 hover:bg-teal-400 text-white font-semibold transition-all transform hover:scale-105 shadow-lg shadow-teal-500/20 flex items-center justify-center gap-2"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
             Télécharger mon CV
