@@ -2,8 +2,10 @@
 import { onMounted, ref } from 'vue';
 import { resumeData } from '@/data/resumeData';
 import { useScrollAnimation } from '@/composables/useScrollAnimation';
+import { useUniverseState } from '@/composables/useUniverseState';
 
 const { createScene } = useScrollAnimation();
+const { state } = useUniverseState();
 const sectionRef = ref(null);
 const cardsRef = ref(null);
 
@@ -46,10 +48,12 @@ onMounted(() => {
       </h2>
 
       <!-- Universe Description -->
-      <div class="max-w-3xl mx-auto text-center mb-12">
-        <p class="text-lg text-slate-300 italic border-l-4 border-purple-500 pl-4 inline-block text-left">
-          "{{ resumeData.universeDescriptions.web }}"
-        </p>
+      <div class="max-w-3xl mx-auto text-center mb-12 min-h-[80px]">
+        <transition name="fade-slide">
+          <p v-if="state.isWebActive" class="text-lg text-slate-300 italic border-l-4 border-purple-500 pl-4 inline-block text-left whitespace-pre-line">
+            "{{ resumeData.descriptions.web }}"
+          </p>
+        </transition>
       </div>
 
       <!-- Skills -->
@@ -90,5 +94,16 @@ onMounted(() => {
 <style scoped>
 .project-card {
   perspective: 1000px;
+}
+
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.8s ease;
+}
+
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
 }
 </style>

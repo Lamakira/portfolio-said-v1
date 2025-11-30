@@ -10,11 +10,23 @@ export const resumeData = {
     location: "Bénin",
     linkedin: "https://linkedin.com/in/saïd-arikama-chabi",
     github: "https://github.com/Lamakira",
+    permis: "B",
   },
-  universeDescriptions: {
-    network: "Dans cet univers, je représente mon côté administrateur réseau : expertise Cisco, Mikrotik, Linux, routage, VLAN, dépannage N2...",
-    web: "Ici, je suis le développeur web : travaux en PHP/Laravel, Vue.js, création de plateformes comme YOWL, FreeAds, Post-it...",
-    data: "Ici, je suis l’analyste Data & IA : analyses Pandas/NumPy, NLP, Deep Learning TensorFlow, dashboards Power BI...",
+  descriptions: {
+    network: `Dans cet univers, je suis l’ingénieur de l’ombre : celui qui garantit que les systèmes tiennent debout.
+Cisco, Mikrotik, VLAN, OSPF, routage, Linux…
+Ici, je construis la colonne vertébrale invisible qui permet au reste de vivre.
+Administrer, diagnostiquer, sécuriser, optimiser — chaque commande, chaque paquet, chaque route compte.
+C’est le monde où je parle le langage des machines.`,
+    web: `Ici, je deviens le créateur d’expériences : je conçois des interfaces qui respirent, des plateformes qui vivent,
+du backend Laravel aux front Vue.js, en passant par les API et la logique métier.
+YOWL, FreeAds, Post-it… chaque projet est un espace où je transforme une idée en produit.
+Dans cet univers, je suis un artisan numérique qui construit des solutions élégantes, utiles et humaines.`,
+    data: `Ici, je suis l’architecte du sens : j’analyse, nettoie, transforme et fais parler les données.
+Pandas, NumPy, modèles ML (SVC, KNN, Random Forest), Deep Learning TensorFlow/Keras…
+NLP, classification, Big Data, dashboards Power BI :
+je façonne l’intelligence qui révèle les tendances et éclaire les décisions.
+Dans cet univers, chaque dataset est une histoire à décoder.`,
   },
   experiences: {
     network: [
@@ -22,7 +34,7 @@ export const resumeData = {
         role: "Administrateur Réseau",
         company: "Anyxtech SARL",
         period: "2022 – 2023",
-        description: "Maintenance réseau, Config TP-Link, Mikrotik, Ubiquiti, Dépannage N2.",
+        description: "Supervision et maintenance réseau, Config TP-Link, Mikrotik, Ubiquiti, Dépannage N2, Support technique client.",
       },
       {
         role: "Support IT",
@@ -34,17 +46,17 @@ export const resumeData = {
     web: [
       {
         role: "Développeur Web & Data",
-        company: "Coding Academy",
+        company: "Projets Académiques",
         period: "2025 – actuel",
-        description: "Développement de projets intensifs : YOWL (Laravel + Vue.js), FreeAds (Laravel), Post-it SPA (Vue.js).",
+        description: "Développement de projets intensifs : YOWL (Laravel + Vue.js + MySQL), FreeAds (Laravel CRUD + Auth), Post-it SPA (Vue.js).",
       },
     ],
     data: [
       {
         role: "Développeur Web & Data",
-        company: "Coding Academy",
+        company: "Projets Académiques",
         period: "2025 – actuel",
-        description: "Deep Learning (Fashion MNIST), NLP (Topic Modeling), Big Data & BI (Dataset 3M lignes).",
+        description: "Deep Learning (Classification Fashion MNIST), NLP (Topic modeling via TF-IDF, LSA), Big Data / BI (Dataset 3M lignes + KPIs Power BI).",
       },
     ],
   },
@@ -64,6 +76,11 @@ export const resumeData = {
         degree: "CCNA",
         school: "En cours",
         year: "",
+      },
+      {
+        degree: "Baccalauréat Série C",
+        school: "",
+        year: "2017",
       },
     ],
     data: [
@@ -85,7 +102,7 @@ export const resumeData = {
       {
         title: "FreeAds",
         description: "Site de petites annonces avec gestion de comptes.",
-        tech: ["Laravel", "PHP"],
+        tech: ["Laravel", "PHP", "Auth"],
         link: "#",
       },
       {
@@ -98,7 +115,7 @@ export const resumeData = {
     data: [
       {
         title: "Deep Learning Fashion MNIST",
-        description: "Classification d'images de mode avec TensorFlow/Keras.",
+        description: "Classification d'images de mode avec TensorFlow/Keras (Dense Networks).",
         tech: ["TensorFlow", "Keras", "Python"],
       },
       {
@@ -114,9 +131,10 @@ export const resumeData = {
     ],
   },
   skills: {
-    network: ["Linux", "Cisco", "Mikrotik", "Ubiquiti", "TP-Link", "VLAN", "OSPF", "Adressage IP"],
-    web: ["Python", "JavaScript", "Vue.js", "PHP", "Laravel", "MySQL"],
-    data: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Power BI", "Scikit-learn", "TensorFlow", "Keras"],
+    network: ["Linux", "Cisco", "Mikrotik", "Ubiquiti", "TP-Link", "Routing & Switching", "VLAN", "OSPF", "Adressage IP"],
+    web: ["Python", "JavaScript", "PHP", "Laravel", "Vue.js", "MySQL", "Fullstack Laravel + Vue.js"],
+    data: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Power BI", "Scikit-learn", "SVC", "SVR", "KNN", "Random Forest", "TensorFlow", "Keras"],
+    soft: ["Esprit d'analyse", "Autonomie", "Adaptabilité"],
   },
   assets: {
     cvUrl: "/assets/CV_Saïd ARIKAMA CHABI.pdf",

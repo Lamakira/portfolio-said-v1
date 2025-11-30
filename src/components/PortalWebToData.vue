@@ -1,42 +1,37 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useScrollAnimation } from '@/composables/useScrollAnimation';
+import { useUniverseState } from '@/composables/useUniverseState';
+import gsap from 'gsap';
 
-const { createPortalTransition, gsap } = useScrollAnimation();
+const { createPortalTransition } = useScrollAnimation();
+const { setDataActive } = useUniverseState();
 const portalRef = ref(null);
 const pixelContainerRef = ref(null);
 
 onMounted(() => {
-  const tl = createPortalTransition(portalRef.value);
+  const tl = createPortalTransition(portalRef.value, 'bg-slate-900', 'bg-slate-50', () => {
+    setDataActive(true);
+  });
   
-  if (tl) {
-    // Transition from dark blue (Web) to white/light gray (Data)
-    tl.to(portalRef.value, {
-      backgroundColor: '#f8fafc', // Slate-50
-      duration: 1,
-    });
-
-    // Matrix/Pixel effect
-    if (pixelContainerRef.value) {
-      const pixels = pixelContainerRef.value.querySelectorAll('.pixel');
-      gsap.to(pixels, {
-        scrollTrigger: {
-          trigger: portalRef.value,
-          start: 'top center',
-          end: 'bottom center',
-          scrub: 1,
-        },
-        y: (i) => Math.sin(i) * 100,
-        x: (i) => Math.cos(i) * 100,
-        opacity: 0,
-        scale: 0,
-        stagger: {
-          amount: 1,
-          from: 'center',
-          grid: 'auto',
-        },
-      });
-    }
+  if (tl && pixelContainerRef.value) {
+    const pixels = pixelContainerRef.value.querySelectorAll('.pixel');
+    
+    // Pixel explosion/reassembly effect
+    // Pixel explosion effect (Dispersion)
+    tl.to(pixels, {
+      x: () => (Math.random() - 0.5) * window.innerWidth * 1.5,
+      y: () => (Math.random() - 0.5) * window.innerHeight * 1.5,
+      rotation: () => Math.random() * 360,
+      scale: 0,
+      opacity: 0,
+      stagger: {
+        amount: 1,
+        from: 'center',
+      },
+      duration: 1.5,
+      ease: 'power3.out',
+    }, '<');
   }
 });
 </script>

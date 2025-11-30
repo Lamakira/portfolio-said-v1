@@ -47,7 +47,7 @@ export function useScrollAnimation() {
   };
 
   // Create a portal transition effect
-  const createPortalTransition = (container, fromClass, toClass) => {
+  const createPortalTransition = (container, fromClass, toClass, onComplete) => {
     if (!container) return;
 
     const tl = gsap.timeline({
@@ -58,6 +58,12 @@ export function useScrollAnimation() {
         pin: true,
         scrub: true,
         invalidateOnRefresh: true,
+        onLeave: () => {
+          if (onComplete) onComplete();
+        },
+        onEnterBack: () => {
+             // Optional: handle reverse direction if needed, but for now we focus on forward
+        }
       },
     });
 

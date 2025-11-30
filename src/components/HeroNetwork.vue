@@ -48,8 +48,8 @@ onMounted(() => {
         <!-- Universe Description -->
         <div class="terminal-line">
           <span class="text-green-300">➜</span> <span class="text-blue-400">~</span> <span class="text-yellow-300">echo $UNIVERSE_DESC</span>
-          <div class="pl-4 mt-1 text-green-100 italic opacity-90">
-            "{{ resumeData.universeDescriptions.network }}"
+          <div class="pl-4 mt-1 text-green-100 italic opacity-90 whitespace-pre-line">
+            "{{ resumeData.descriptions.network }}"
           </div>
         </div>
 
@@ -75,7 +75,7 @@ onMounted(() => {
           <div class="pl-4 mt-1 space-y-2 text-green-100">
             <div v-for="(edu, index) in resumeData.education.network" :key="index">
               <span class="text-green-400 font-bold">{{ edu.degree }}</span>
-              <span class="text-green-600"> @ {{ edu.school }}</span>
+              <span class="text-green-600" v-if="edu.school"> @ {{ edu.school }}</span>
               <span class="text-green-700 text-sm ml-2">[{{ edu.year }}]</span>
             </div>
           </div>

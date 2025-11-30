@@ -2,8 +2,10 @@
 import { onMounted, ref } from 'vue';
 import { resumeData } from '@/data/resumeData';
 import { useScrollAnimation } from '@/composables/useScrollAnimation';
+import { useUniverseState } from '@/composables/useUniverseState';
 
 const { createScene } = useScrollAnimation();
+const { state } = useUniverseState();
 const sectionRef = ref(null);
 const chartRef = ref(null);
 
@@ -36,14 +38,16 @@ onMounted(() => {
 
     <div class="container mx-auto relative z-10">
       <h2 class="text-4xl md:text-5xl font-bold text-center text-slate-900 mb-16 tracking-tight">
-        Data & Intelligence
+        Data & IA
       </h2>
 
       <!-- Universe Description -->
-      <div class="max-w-3xl mx-auto text-center mb-12">
-        <p class="text-lg text-slate-600 italic border-l-4 border-blue-500 pl-4 inline-block text-left">
-          "{{ resumeData.universeDescriptions.data }}"
-        </p>
+      <div class="max-w-3xl mx-auto text-center mb-12 min-h-[80px]">
+        <transition name="fade-slide">
+          <p v-if="state.isDataActive" class="text-lg text-slate-600 italic border-l-4 border-blue-500 pl-4 inline-block text-left whitespace-pre-line">
+            "{{ resumeData.descriptions.data }}"
+          </p>
+        </transition>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

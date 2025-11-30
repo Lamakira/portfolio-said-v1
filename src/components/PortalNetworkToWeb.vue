@@ -1,34 +1,30 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useScrollAnimation } from '@/composables/useScrollAnimation';
+import { useUniverseState } from '@/composables/useUniverseState';
 
 const { createPortalTransition, gsap } = useScrollAnimation();
+const { setWebActive } = useUniverseState();
 const portalRef = ref(null);
 const textRef = ref(null);
 
 onMounted(() => {
-  const tl = createPortalTransition(portalRef.value);
-  
-  if (tl) {
-    // Transition from black (Network) to dark blue/purple (Web)
-    tl.to(portalRef.value, {
-      backgroundColor: '#0f172a', // Slate-900
-      duration: 1,
-    });
+  createPortalTransition(portalRef.value, 'bg-black', 'bg-slate-900', () => {
+    setWebActive(true);
+  });
 
-    // Glitch effect on text
-    gsap.to(textRef.value, {
-      scrollTrigger: {
-        trigger: portalRef.value,
-        start: 'top center',
-        end: 'center center',
-        scrub: true,
-      },
-      textShadow: '2px 2px 0px #00ff00, -2px -2px 0px #ff00ff',
-      scale: 1.1,
-      opacity: 0,
-    });
-  }
+  // Glitch effect on text
+  gsap.to(textRef.value, {
+    scrollTrigger: {
+      trigger: portalRef.value,
+      start: 'top center',
+      end: 'center center',
+      scrub: true,
+    },
+    textShadow: '2px 2px 0px #00ff00, -2px -2px 0px #ff00ff',
+    scale: 1.1,
+    opacity: 0,
+  });
 });
 </script>
 
