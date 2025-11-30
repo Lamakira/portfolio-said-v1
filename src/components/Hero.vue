@@ -54,15 +54,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <section ref="heroRef" class="relative w-full max-w-none min-h-screen flex items-center justify-center bg-slate-950 overflow-hidden text-white">
+  <section ref="heroRef" class="relative w-full max-w-none min-h-screen flex flex-col justify-between bg-slate-950 overflow-hidden text-white py-12 md:py-0">
     
     <!-- Subtle Background -->
     <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"></div>
     <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
     <div class="absolute bottom-1/4 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
 
-    <!-- Main Content - Photo Left, Text Right -->
-    <div class="relative z-10 container mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24">
+    <!-- Main Content - Photo Left, Text Right (Top Section) -->
+    <div class="relative z-10 container mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 flex-grow md:flex-grow-0 md:my-auto">
       
       <!-- Photo - Left Side -->
       <div class="flex-shrink-0">
@@ -91,7 +91,7 @@ onMounted(() => {
         
         <!-- Subtitle -->
         <h2 class="text-lg md:text-xl lg:text-2xl text-teal-400 font-light mb-6">
-          Développeur Web & Data Analyst / Administrateur Réseau
+          Data Analyst & Développeur Web / Administrateur Réseau
         </h2>
         
         <!-- Description -->
@@ -100,7 +100,7 @@ onMounted(() => {
         </p>
         
         <!-- Actions -->
-        <div class="flex flex-col sm:flex-row gap-4 items-center mb-12">
+        <div class="flex flex-col sm:flex-row gap-4 items-center mb-8 md:mb-0">
           <a 
             :href="resumeData.assets.cvUrl" 
             download 
@@ -129,23 +129,19 @@ onMounted(() => {
             </a>
           </div>
         </div>
-        
-        <!-- Journey Invitation Text -->
-        <p class="text-sm text-slate-400 italic max-w-lg">
-          Explorez mes trois univers : <span class="text-teal-300">Dev</span>, <span class="text-blue-300">Data</span>, <span class="text-purple-300">Réseau</span> — un voyage à travers mes compétences.
-        </p>
       </div>
     </div>
 
-    <!-- Scroll Call-to-Action -->
-    <div class="absolute bottom-32 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-6">
-      <p ref="scrollCtaRef" class="text-2xl md:text-3xl lg:text-4xl font-semibold text-center text-blue-300 drop-shadow-[0_0_15px_rgba(147,197,253,0.5)]">
-        💬 Explorez les trois piliers de mon savoir-faire : l'ingénierie réseau, le développement web et l'analyse de données.
-      </p>
-    </div>
+    <!-- Bottom Section: Scroll CTA + Arrow (Always at Bottom) -->
+    <div class="relative z-10 flex flex-col items-center gap-6 pb-8 md:pb-10">
+      <!-- Scroll Call-to-Action -->
+      <div class="w-full max-w-4xl px-6">
+        <p ref="scrollCtaRef" class="text-sm sm:text-base md:text-xl lg:text-2xl font-semibold text-center text-blue-300 drop-shadow-[0_0_15px_rgba(147,197,253,0.5)] leading-relaxed">
+          💬 Explorez les trois piliers de mon savoir-faire : l'ingénierie réseau, le développement web et l'analyse de données.
+        </p>
+      </div>
 
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
+      <!-- Scroll Indicator -->
       <div class="animate-bounce">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
