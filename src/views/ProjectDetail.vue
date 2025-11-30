@@ -206,7 +206,7 @@ onUnmounted(() => {
           
           <h2 class="text-3xl font-bold mb-8 text-white flex items-center gap-4">
             <span class="w-12 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></span>
-            Overview
+            À propos du projet
           </h2>
           <div class="prose prose-invert prose-lg max-w-none text-slate-300 leading-loose whitespace-pre-line">
             {{ project.description }}
