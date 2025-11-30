@@ -5,6 +5,7 @@ import { useScrollAnimation } from '@/composables/useScrollAnimation';
 
 const { createScene } = useScrollAnimation();
 const sectionRef = ref(null);
+const titleRef = ref(null);
 const terminalRef = ref(null);
 
 const experiences = resumeData.experiences.network;
@@ -17,23 +18,47 @@ onMounted(() => {
     end: 'bottom bottom',
   });
 
-  if (tl && terminalRef.value) {
-    const lines = terminalRef.value.querySelectorAll('.terminal-line');
-    tl.from(lines, {
-      opacity: 0,
-      x: -20,
-      stagger: 0.5,
-      duration: 1,
-      ease: 'power2.out',
-    });
+  if (tl) {
+    // Animate title first
+    if (titleRef.value) {
+      tl.from(titleRef.value.children, {
+        y: -20,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
+    }
+    
+    // Then animate terminal lines
+    if (terminalRef.value) {
+      const lines = terminalRef.value.querySelectorAll('.terminal-line');
+      tl.from(lines, {
+        opacity: 0,
+        x: -20,
+        stagger: 0.5,
+        duration: 1,
+        ease: 'power2.out',
+      }, '-=0.3');
+    }
   }
 });
 </script>
 
 <template>
-  <section ref="sectionRef" class="w-full! max-w-none! min-h-screen bg-black text-green-500 font-mono p-8 flex items-center justify-center relative overflow-hidden">
+  <section ref="sectionRef" class="w-full! max-w-none! min-h-screen bg-black text-green-500 font-mono p-8 flex flex-col items-center justify-center relative overflow-hidden">
     <!-- CRT Scanline Effect -->
     <div class="absolute inset-0 pointer-events-none z-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]"></div>
+    
+    <!-- Universe Title -->
+    <div ref="titleRef" class="w-full max-w-4xl mb-8 text-center z-20">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-green-400 mb-3 drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]">
+        /root/network_universe
+      </h2>
+      <p class="text-sm md:text-base text-green-500/80 font-light tracking-wider">
+        Infrastructure • Cybersécurité • Systèmes & Réseaux
+      </p>
+    </div>
     
     <!-- Terminal Container -->
     <div ref="terminalRef" class="w-full max-w-4xl border border-green-800 bg-black/90 p-6 rounded shadow-[0_0_20px_rgba(0,255,0,0.2)] z-20">
@@ -48,8 +73,8 @@ onMounted(() => {
         <!-- Universe Description -->
         <div class="terminal-line">
           <span class="text-green-300">➜</span> <span class="text-blue-400">~</span> <span class="text-yellow-300">echo $UNIVERSE_DESC</span>
-          <div class="pl-4 mt-1 text-green-100 italic opacity-90">
-            "{{ resumeData.universeDescriptions.network }}"
+          <div class="pl-4 mt-1 text-green-100 italic opacity-90 whitespace-pre-line">
+            "{{ resumeData.descriptions.network }}"
           </div>
         </div>
 
@@ -75,7 +100,7 @@ onMounted(() => {
           <div class="pl-4 mt-1 space-y-2 text-green-100">
             <div v-for="(edu, index) in resumeData.education.network" :key="index">
               <span class="text-green-400 font-bold">{{ edu.degree }}</span>
-              <span class="text-green-600"> @ {{ edu.school }}</span>
+              <span class="text-green-600" v-if="edu.school"> @ {{ edu.school }}</span>
               <span class="text-green-700 text-sm ml-2">[{{ edu.year }}]</span>
             </div>
           </div>

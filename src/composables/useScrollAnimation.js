@@ -47,24 +47,30 @@ export function useScrollAnimation() {
   };
 
   // Create a portal transition effect
-  const createPortalTransition = (container, fromClass, toClass) => {
+  const createPortalTransition = (container, fromClass, toClass, onComplete, isMobile = false) => {
     if (!container) return;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         start: 'top top',
-        end: '+=100%',
+        end: isMobile ? '+=60%' : '+=100%', // Shorter on mobile
         pin: true,
-        scrub: true,
+        scrub: isMobile ? 0.3 : true, // Faster response on mobile
         invalidateOnRefresh: true,
+        onLeave: () => {
+          if (onComplete) onComplete();
+        },
+        onEnterBack: () => {
+             // Optional: handle reverse direction if needed, but for now we focus on forward
+        }
       },
     });
 
     // Example transition logic (customizable)
     tl.to(container, {
       backgroundColor: '#000', // Example
-      duration: 1,
+      duration: isMobile ? 0.6 : 1, // Faster on mobile
     });
 
     return tl;
