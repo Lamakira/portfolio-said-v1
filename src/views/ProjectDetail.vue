@@ -1,10 +1,11 @@
 <script setup>
-import { ref, onMounted, computed, nextTick, onUnmounted, watch } from 'vue';
+import { ref, onMounted, computed, nextTick, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { projectsData } from '@/data/projects';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import BackButton from '@/components/BackButton.vue';
+import ProjectCarousel from '@/components/ProjectCarousel.vue';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,11 +22,6 @@ const metadataRef = ref(null);
 
 // Dynamic Image Loading
 const images = ref([]);
-const currentIndex = ref(0);
-
-// Lightbox State
-const lightboxOpen = ref(false);
-const lightboxIndex = ref(0);
 
 const loadImages = async () => {
   if (!project.value) return;
@@ -40,52 +36,7 @@ const loadImages = async () => {
     }
   }
   images.value = projectImages;
-};
-
-// Carousel Navigation
-const nextSlide = () => {
-  if (images.value.length === 0) return;
-  currentIndex.value = (currentIndex.value + 1) % images.value.length;
-};
-
-const prevSlide = () => {
-  if (images.value.length === 0) return;
-  currentIndex.value = (currentIndex.value - 1 + images.value.length) % images.value.length;
-};
-
-const goToSlide = (index) => {
-  currentIndex.value = index;
-};
-
-// Lightbox Functions
-const openLightbox = (index) => {
-  lightboxIndex.value = index;
-  lightboxOpen.value = true;
-  document.body.style.overflow = 'hidden';
-};
-
-const closeLightbox = () => {
-  lightboxOpen.value = false;
-  document.body.style.overflow = 'auto';
-};
-
-const nextLightboxImage = () => {
-  lightboxIndex.value = (lightboxIndex.value + 1) % images.value.length;
-};
-
-const prevLightboxImage = () => {
-  lightboxIndex.value = (lightboxIndex.value - 1 + images.value.length) % images.value.length;
-};
-
-// Keyboard Support for Lightbox
-const handleKeydown = (e) => {
-  if (!lightboxOpen.value) return;
-  
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowRight') nextLightboxImage();
-  if (e.key === 'ArrowLeft') prevLightboxImage();
-};
-
+}
 // Watch for route changes and force scroll to top
 watch(() => route.params.slug, () => {
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -152,14 +103,6 @@ onMounted(async () => {
       x: -50, opacity: 0, stagger: 0.2, duration: 1, ease: 'power2.out'
     });
   }
-  
-  // Add keyboard listener
-  window.addEventListener('keydown', handleKeydown);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeydown);
-  document.body.style.overflow = 'auto';
 });
 </script>
 
@@ -227,103 +170,14 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <!-- C. Premium 3D Carousel -->
-    <section v-if="images.length > 0" ref="carouselContainerRef" class="py-20 px-6 overflow-hidden">
+    <!-- C. Project Carousel -->
+    <section v-if="images.length > 0" ref="carouselContainerRef" class="py-20 px-6">
       <div class="container mx-auto max-w-6xl">
-        <h2 class="text-3xl font-bold mb-12 text-center text-white">Galerie du Projet</h2>
+        <h2 class="text-3xl font-bold mb-12 text-center" style="color: var(--text-primary);">Galerie du Projet</h2>
         
-        <!-- Carousel Wrapper -->
-        <div class="relative">
-          <!-- Glow Background for Active Image -->
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-full blur-[120px] pointer-events-none"></div>
-          
-          <!-- Carousel Track - INCREASED SIZE -->
-          <div class="relative h-[500px] md:h-[650px] flex items-center justify-center perspective-1000">
-            <div class="relative w-full max-w-6xl h-full flex items-center justify-center">
-              
-              <!-- Images -->
-              <div v-for="(img, index) in images" :key="index"
-                   class="absolute transition-all duration-700 ease-out cursor-pointer"
-                   :class="{
-                     'z-30': index === currentIndex,
-                     'z-20': Math.abs(index - currentIndex) === 1,
-                     'z-10': Math.abs(index - currentIndex) > 1,
-                   }"
-                   :style="{
-                     transform: `translateX(${(index - currentIndex) * 420}px) scale(${index === currentIndex ? 1 : 0.75})`,
-                     opacity: Math.abs(index - currentIndex) > 1 ? 0 : (index === currentIndex ? 1 : 0.5),
-                   }"
-                   @click="index === currentIndex ? openLightbox(index) : goToSlide(index)">
-                <div class="relative w-[350px] md:w-[550px] h-[250px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
-                  <img :src="img" :alt="`${project.title} screenshot ${index + 1}`" class="w-full h-full object-cover" />
-                  
-                  <!-- Hover Overlay (only on active image) -->
-                  <div v-if="index === currentIndex" class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                    <span class="text-white font-medium px-6 py-3 rounded-full bg-white/20 backdrop-blur-md border border-white/20 flex items-center gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                      </svg>
-                      Agrandir
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Navigation Arrows -->
-          <button @click="prevSlide" class="absolute left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button @click="nextSlide" class="absolute right-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-          
-          <!-- Dots Indicator -->
-          <div class="flex justify-center gap-2 mt-8">
-            <button v-for="(img, index) in images" :key="index" 
-                    @click="goToSlide(index)"
-                    class="w-2 h-2 rounded-full transition-all duration-300"
-                    :class="index === currentIndex ? 'bg-purple-500 w-8' : 'bg-white/30 hover:bg-white/50'">
-            </button>
-          </div>
-        </div>
+        <ProjectCarousel :images="images" :project-title="project.title" />
       </div>
     </section>
-
-    <!-- Lightbox -->
-    <Transition name="lightbox">
-      <div v-if="lightboxOpen" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4" @click.self="closeLightbox">
-        <!-- Close Button -->
-        <button class="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-50" @click="closeLightbox">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-        
-        <!-- Previous Button -->
-        <button class="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white p-2 z-50" @click="prevLightboxImage">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        
-        <!-- Image -->
-        <img :src="images[lightboxIndex]" class="max-w-full max-h-[90vh] rounded-2xl shadow-[0_0_50px_rgba(168,85,247,0.3)] border border-purple-500/20" />
-        
-        <!-- Back Button -->
-      <div class="text-center py-12">
-        <BackButton />
-      </div>
-        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 font-mono bg-black/50 px-4 py-2 rounded-full backdrop-blur-md">
-          {{ lightboxIndex + 1 }} / {{ images.length }}
-        </div>
-      </div>
-    </Transition>
 
     <!-- D. Technical Breakdown -->
     <section ref="techRef" class="py-20 px-6 bg-slate-900/50 relative">
