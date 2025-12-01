@@ -166,7 +166,7 @@ Dans cet univers, chaque dataset est une histoire à décoder.`,
     },
   },
   assets: {
-    cvUrl: "/assets/CV_Saïd ARIKAMA CHABI.pdf",
+    cvUrl: new URL('../assets/CV_Saïd ARIKAMA CHABI.pdf', import.meta.url).href,
     photoUrl: "",
   },
 };
